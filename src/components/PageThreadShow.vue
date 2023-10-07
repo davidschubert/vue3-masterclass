@@ -1,18 +1,29 @@
 <script setup>
 import sourceData from '@/data.json'
-import { ref } from 'vue'
+import { reactive, computed } from 'vue'
 
-const threads = ref(sourceData.threads)
-const posts = ref(sourceData.posts)
-const users = ref(sourceData.users)
+const threads = reactive(sourceData.threads)
+const posts = reactive(sourceData.posts)
+const users = reactive(sourceData.users)
+
+const props = defineProps({
+  id: {
+    required: true,
+    type: String
+  }
+})
 
 function postById(postId) {
-  return posts.value.find((p) => p.id === postId)
+  return posts.find((p) => p.id === postId)
 }
 
 function userById(userId) {
-  return users.value.find((p) => p.id === userId)
+  return users.find((p) => p.id === userId)
 }
+
+const thread = computed(() => {
+  return threads.find((thread) => thread.id === props.id)
+})
 </script>
 
 <template>
