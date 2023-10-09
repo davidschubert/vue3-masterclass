@@ -1,10 +1,11 @@
 <script setup>
-import sourceData from '@/data.json'
 import { ref } from 'vue'
+import sourceData from '@/data.json'
 
-const threads = ref(sourceData.threads)
-const users = ref(sourceData.users)
+// Import dayjs
+import { timeDiffForHumans, humanFriendlyDate } from '@/helpers/appDateFormatter.js'
 
+// Props
 defineProps({
   threads: {
     type: Array,
@@ -12,8 +13,12 @@ defineProps({
   }
 })
 
+// Data
+const usersData = ref(sourceData.users)
+
+// Methods
 function userById(userId) {
-  return users.value.find((p) => p.id === userId)
+  return usersData.value.find((p) => p.id === userId)
 }
 </script>
 
@@ -28,13 +33,15 @@ function userById(userId) {
               thread.title
             }}</router-link>
           </p>
-          <p class="text-fade text-xsmall">
-            By <a href="#">{{ userById(thread.userId).name }}</a
-            >, {{ thread.publishedAt }}
+          <p class="text-faded text-xsmall">
+            Posted by <a href="#">{{ userById(thread.userId).name }}</a> ·
+            <time :title="humanFriendlyDate(thread.publishedAt)">
+              {{ timeDiffForHumans(thread.publishedAt) }}
+            </time>
           </p>
         </div>
         <div class="activity">
-          <p class="replies-count">{{ thread.posts.length }} replies</p>
+          <p class="replies-count">{{ thread.posts.length }} Antworten</p>
 
           <img :src="userById(thread.userId).avatar" alt="" class="avatar-medium" />
 
@@ -42,7 +49,9 @@ function userById(userId) {
             <p class="text-xsmall">
               <a href="profile.html">{{ userById(thread.userId).name }}</a>
             </p>
-            <p class="text-xsmall text-faded">{{ thread.publishedAt }}</p>
+            <time class="text-xsmall text-faded" :title="humanFriendlyDate(thread.publishedAt)">
+              {{ timeDiffForHumans(thread.publishedAt) }}
+            </time>
           </div>
         </div>
       </div>

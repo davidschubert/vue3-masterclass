@@ -1,13 +1,15 @@
 <script setup>
-import ThreadList from '@/components/threadList.vue'
+import ThreadList from '@/components/ThreadList.vue'
 import sourceData from '@/data.json'
+import VueVersion from '@/components/VueVersion.vue'
 
 const threads = sourceData.threads
 </script>
 
 <template>
-  <h1>Welcome to the Forum</h1>
+  <h1>Willkommen im Forum</h1>
   <ThreadList :threads="threads" />
+  <VueVersion />
 </template>
 
 <style scoped>
