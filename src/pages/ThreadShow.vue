@@ -1,11 +1,10 @@
 <script setup>
+import { reactive, computed } from 'vue'
 import sourceData from '@/data.json'
 import PostList from '@/components/PostList.vue'
-import { reactive, computed } from 'vue'
+import PostEditor from '@/components/PostEditor.vue'
 
-const threads = reactive(sourceData.threads)
-const posts = reactive(sourceData.posts)
-
+// Props
 const props = defineProps({
   id: {
     required: true,
@@ -13,6 +12,11 @@ const props = defineProps({
   }
 })
 
+// Data
+const threads = reactive(sourceData.threads)
+const posts = reactive(sourceData.posts)
+
+// Methods - PostList
 const thread = computed(() => {
   return threads.find((thread) => thread.id === props.id)
 })
@@ -20,6 +24,19 @@ const thread = computed(() => {
 const threadPosts = computed(() => {
   return posts.filter((post) => post.threadId === props.id)
 })
+
+// Methods - PostEditor
+const handleAddPostEvent = (eventData) => {
+  // Fange die Daten aus dem Kind-Component ab und speichere sie im Objekt "post"
+  const post = {
+    ...eventData.postEditorData,
+    threadId: thread.value.id
+  }
+
+  // Füge den neuen Post dem Array posts hinzu
+  posts.push(post)
+  thread.value.posts.push(post.id)
+}
 </script>
 
 <template>
@@ -28,26 +45,7 @@ const threadPosts = computed(() => {
 
     <PostList :posts="threadPosts" />
 
-    <div class="col-full">
-      <h2>New posting</h2>
-
-      <form>
-        <div class="form-group">
-          <label for="thread_content">Content:</label>
-          <textarea
-            id="post_content"
-            class="form-input"
-            name="posting"
-            rows="10"
-            cols="30"
-          ></textarea>
-        </div>
-
-        <div class="form-actions">
-          <button class="btn btn-blue" type="submit">Submit Post</button>
-        </div>
-      </form>
-    </div>
+    <PostEditor @savePostEvent="handleAddPostEvent" />
   </div>
 </template>
 
