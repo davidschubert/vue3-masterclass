@@ -1,14 +1,15 @@
 <script setup>
-import ThreadList from '@/components/ThreadList.vue'
-import sourceData from '@/data.json'
 import VueVersion from '@/components/VueVersion.vue'
+import CategoryList from '@/components/CategoryList.vue'
+import sourceData from '@/data.json'
 
-const threads = sourceData.threads
+// Data
+const categories = sourceData.categories
 </script>
 
 <template>
   <h1>Willkommen im Forum</h1>
-  <ThreadList :threads="threads" />
+  <CategoryList :categories="categories" />
   <VueVersion />
 </template>
 

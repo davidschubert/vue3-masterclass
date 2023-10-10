@@ -8,8 +8,8 @@ import { timeDiffForHumans, humanFriendlyDate } from '@/helpers/appDateFormatter
 // Props
 defineProps({
   threads: {
-    type: Array,
-    required: true
+    required: true,
+    type: Array
   }
 })
 
