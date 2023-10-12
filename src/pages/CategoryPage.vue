@@ -1,7 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import sourceData from '@/data.json'
 import ForumList from '@/components/ForumList.vue'
 
 // Nehmen Sie die Kategorien und Foren als Props an
