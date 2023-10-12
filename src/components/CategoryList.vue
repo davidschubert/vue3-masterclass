@@ -1,6 +1,4 @@
 <script setup>
-import { ref, computed } from 'vue'
-import sourceData from '@/data.json'
 import ForumList from '@/components/ForumList.vue'
 
 const props = defineProps({

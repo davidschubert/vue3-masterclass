@@ -29,12 +29,12 @@ const currentForums = computed(() => {
 
 <template>
   <div class="col-full">
-    <h1>{{ currentCategory.name }}</h1>
     <div class="forum-list">
       <div v-if="currentCategory">
+        <h1>{{ currentCategory.name }}</h1>
         <ForumList :forums="currentForums" />
       </div>
-      <div v-else>Kategorie nicht gefunden.</div>
+      <div v-else><h2>Kategorie nicht gefunden.</h2></div>
     </div>
   </div>
 </template>
