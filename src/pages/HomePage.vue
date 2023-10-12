@@ -1,15 +1,17 @@
 <script setup>
+import { ref } from 'vue'
+import sourceData from '@/data.json'
 import VueVersion from '@/components/VueVersion.vue'
 import CategoryList from '@/components/CategoryList.vue'
-import sourceData from '@/data.json'
 
 // Data
-const categories = sourceData.categories
+const categoryData = ref(sourceData.categories)
+const forumData = ref(sourceData.forums)
 </script>
 
 <template>
   <h1>Willkommen im Forum</h1>
-  <CategoryList :categories="categories" />
+  <CategoryList :categories="categoryData" :allForums="forumData" />
   <VueVersion />
 </template>
 

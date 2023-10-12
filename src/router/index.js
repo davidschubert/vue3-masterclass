@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+import sourceData from '@/data.json'
+
 import HomePage from '@/pages/HomePage.vue'
 import CategoryPage from '@/pages/CategoryPage.vue'
 import ForumPage from '@/pages/ForumPage.vue'
 import ThreadShow from '@/pages/ThreadShow.vue'
 import NotFound from '@/pages/NotFound.vue'
-import sourceData from '@/data.json'
 
 const routes = [
   {
@@ -16,7 +18,10 @@ const routes = [
     path: '/category/:id',
     name: 'Category',
     component: CategoryPage,
-    props: true
+    props: (route) => ({
+      categories: sourceData.categories,
+      allForums: sourceData.forums
+    })
   },
   {
     path: '/forum/:id',

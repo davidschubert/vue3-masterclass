@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import ThreadList from '@/components/ThreadList.vue'
 import sourceData from '@/data.json'
+import ThreadList from '@/components/ThreadList.vue'
 
 // Props
 const props = defineProps({
